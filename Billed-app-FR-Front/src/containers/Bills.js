@@ -10,20 +10,18 @@ export default class {
     this.store = store;
     new Logout({ document, localStorage, onNavigate });
 
-    setTimeout(() => {
-      const buttonNewBill = document.querySelector(
-        `button[data-testid="btn-new-bill"]`
-      );
-      const iconEye = document.querySelectorAll(`div[data-testid="icon-eye"]`);
-      if (buttonNewBill) {
-        buttonNewBill.addEventListener("click", this.handleClickNewBill);
-      }
-      if (iconEye) {
-        iconEye.forEach((icon) => {
-          icon.addEventListener("click", () => this.handleClickIconEye(icon));
-        });
-      }
-    }, 200);
+    const buttonNewBill = document.querySelector(
+      `button[data-testid="btn-new-bill"]`
+    );
+    const iconEye = document.querySelectorAll(`div[data-testid="icon-eye"]`);
+    if (buttonNewBill) {
+      buttonNewBill.addEventListener("click", this.handleClickNewBill);
+    }
+    if (iconEye) {
+      iconEye.forEach((icon) => {
+        icon.addEventListener("click", () => this.handleClickIconEye(icon));
+      });
+    }
   }
 
   handleClickNewBill = () => {
