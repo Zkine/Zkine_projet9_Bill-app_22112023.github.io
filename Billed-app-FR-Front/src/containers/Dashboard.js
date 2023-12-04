@@ -1,6 +1,6 @@
 import { formatDate } from "../app/format.js";
 import DashboardFormUI from "../views/DashboardFormUI.js";
-import BigBilledIcon from "../assets/svg/big_billed.js";
+// import BigBilledIcon from "../assets/svg/big_billed.js";
 import { ROUTES_PATH } from "../constants/routes.js";
 import USERS_TEST from "../constants/usersTest.js";
 import Logout from "./Logout.js";
@@ -113,7 +113,7 @@ export default class {
       // qui affichera une page vierge
       // this.counter++;
     }
-    //  Je supprime le bloc else qui revoie une image SVG non conforme au projet
+    //  Je supprime le bloc else qui renvoie une image SVG non conforme au projet
     // else {
     //   $(`#open-bill${bill.id}`).css({ background: "#0D5AE5" });
 

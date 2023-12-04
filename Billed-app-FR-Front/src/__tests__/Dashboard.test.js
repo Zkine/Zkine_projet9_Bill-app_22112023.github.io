@@ -91,6 +91,7 @@ describe("Given I am connected as an Admin", () => {
       expect(handleShowTickets1).toHaveBeenCalled();
       await waitFor(() => screen.getByTestId(`open-bill47qAXb6fIm2zOKkLzMro`));
       expect(screen.getByTestId(`open-bill47qAXb6fIm2zOKkLzMro`)).toBeTruthy();
+
       icon2.addEventListener("click", handleShowTickets2);
       userEvent.click(icon2);
       expect(handleShowTickets2).toHaveBeenCalled();
@@ -318,9 +319,9 @@ describe("Given I am a user connected as Admin", () => {
       router();
       window.onNavigate(ROUTES_PATH.Dashboard);
       await waitFor(() => screen.getByText("Validations"));
-      const contentPending = await screen.getByText("En attente (1)");
+      const contentPending = screen.getByText("En attente (1)");
       expect(contentPending).toBeTruthy();
-      const contentRefused = await screen.getByText("Refusé (2)");
+      const contentRefused = screen.getByText("Refusé (2)");
       expect(contentRefused).toBeTruthy();
       expect(screen.getByTestId("big-billed-icon")).toBeTruthy();
     });

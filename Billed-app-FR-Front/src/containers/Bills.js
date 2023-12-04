@@ -4,7 +4,7 @@ import Logout from "./Logout.js";
 
 export default class {
   constructor({ document, onNavigate, store, localStorage }) {
-    // this.document n'est pas utilisisé
+    // this.document n'est pas utilisé
     // this.document = document;
     this.onNavigate = onNavigate;
     this.store = store;
@@ -38,7 +38,8 @@ export default class {
       .html(
         `<div style='text-align: center;' class="bill-proof-container"><img width=${imgWidth} src=${billUrl} alt="Bill" /></div>`
       );
-    $("#modaleFile").modal("show");
+    if (typeof $("#modaleFile").modal === "function")
+      $("#modaleFile").modal("show");
   };
 
   getBills = () => {
@@ -67,7 +68,6 @@ export default class {
               }
             })
             .sort((a, b) => (Date.parse(a.date) < Date.parse(b.date) ? 1 : -1));
-
           return bills;
         });
     }
