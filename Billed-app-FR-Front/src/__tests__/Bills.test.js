@@ -175,59 +175,58 @@ describe("Given I am a user connected as Employee", () => {
       document.body.append(root);
       router();
       window.onNavigate(ROUTES_PATH.Bills);
-      await waitFor(() => screen.getByTestId("icon-window"));
-      await waitFor(() => screen.getByText("Mes notes de frais "));
+      await waitFor(() => screen.getByText("Mes notes de frais"));
       const contentPending = screen.getByText("pending");
       expect(contentPending).toBeTruthy();
-      // const contentRefused = screen.getByText("refused");
-      // expect(contentRefused).toBeTruthy();
+      const contentRefused = screen.getByText("accepted");
+      expect(contentRefused).toBeTruthy();
     });
-    // describe("When an error occurs on API", () => {
-    //   beforeEach(() => {
-    //     jest.spyOn(mockStore, "bills");
-    //     Object.defineProperty(window, "localStorage", {
-    //       value: localStorageMock,
-    //     });
-    //     window.localStorage.setItem(
-    //       "user",
-    //       JSON.stringify({
-    //         type: "Admin",
-    //         email: "a@a",
-    //       })
-    //     );
-    //     const root = document.createElement("div");
-    //     root.setAttribute("id", "root");
-    //     document.body.appendChild(root);
-    //     router();
-    //   });
-    //   // test("fetches bills from an API and fails with 404 message error", async () => {
-    //   //   mockStore.bills.mockImplementationOnce(() => {
-    //   //     return {
-    //   //       list: () => {
-    //   //         return Promise.reject(new Error("Erreur 404"));
-    //   //       },
-    //   //     };
-    //   //   });
-    //   //   window.onNavigate(ROUTES_PATH.Bills);
-    //   //   await new Promise(process.nextTick);
-    //   //   const message = await screen.getByText(/Erreur 404/);
-    //   //   expect(message).toBeTruthy();
-    //   // });
+    describe("When an error occurs on API", () => {
+      beforeEach(() => {
+        jest.spyOn(mockStore, "bills");
+        Object.defineProperty(window, "localStorage", {
+          value: localStorageMock,
+        });
+        window.localStorage.setItem(
+          "user",
+          JSON.stringify({
+            type: "Employee",
+            email: "a@a",
+          })
+        );
+        const root = document.createElement("div");
+        root.setAttribute("id", "root");
+        document.body.appendChild(root);
+        router();
+      });
+      test("fetches bills from an API and fails with 404 message error", async () => {
+        mockStore.bills.mockImplementationOnce(() => {
+          return {
+            list: () => {
+              return Promise.reject(new Error("Erreur 404"));
+            },
+          };
+        });
+        window.onNavigate(ROUTES_PATH.Bills);
+        await new Promise(process.nextTick);
+        const message = screen.getByText(/Erreur 404/);
+        expect(message).toBeTruthy();
+      });
 
-    //   // test("fetches messages from an API and fails with 500 message error", async () => {
-    //   //   mockStore.bills.mockImplementationOnce(() => {
-    //   //     return {
-    //   //       list: () => {
-    //   //         return Promise.reject(new Error("Erreur 500"));
-    //   //       },
-    //   //     };
-    //   //   });
+      test("fetches messages from an API and fails with 500 message error", async () => {
+        mockStore.bills.mockImplementationOnce(() => {
+          return {
+            list: () => {
+              return Promise.reject(new Error("Erreur 500"));
+            },
+          };
+        });
 
-    //   //   window.onNavigate(ROUTES_PATH.Bills);
-    //   //   await new Promise(process.nextTick);
-    //   //   const message = await screen.getByText(/Erreur 500/);
-    //   //   expect(message).toBeTruthy();
-    //   // });
-    // });
+        window.onNavigate(ROUTES_PATH.Bills);
+        await new Promise(process.nextTick);
+        const message = screen.getByText(/Erreur 500/);
+        expect(message).toBeTruthy();
+      });
+    });
   });
 });
