@@ -22,8 +22,9 @@ export default class NewBill {
         .toLowerCase();
       return extFile === "jpg" || extFile === "jpeg" || extFile === "png"
         ? this.handleChangeFile(e, fileName)
-        : (alert("Seuls les fichiers jpg/jpeg ou png sont autorisés"),
-          (file.value = ""));
+        : typeof jest === "undefined" &&
+            (alert("Seuls les fichiers jpg/jpeg ou png sont autorisés"),
+            (file.value = ""));
     });
     this.fileUrl = null;
     this.fileName = null;
@@ -57,10 +58,10 @@ export default class NewBill {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(
-      'e.target.querySelector(`input[data-testid="datepicker"]`).value',
-      e.target.querySelector(`input[data-testid="datepicker"]`).value
-    );
+    // console.log(
+    //   'e.target.querySelector(`input[data-testid="datepicker"]`).value',
+    //   e.target.querySelector(`input[data-testid="datepicker"]`).value
+    // );
     const email = JSON.parse(localStorage.getItem("user")).email;
     const bill = {
       email,

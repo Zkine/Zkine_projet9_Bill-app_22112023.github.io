@@ -5,7 +5,6 @@
 import "@testing-library/jest-dom";
 import { screen, waitFor } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
-import fireEvent from "@testing-library/user-event";
 import BillsUI from "../views/BillsUI.js";
 import { bills } from "../fixtures/bills.js";
 import { ROUTES, ROUTES_PATH } from "../constants/routes.js";
@@ -57,7 +56,6 @@ describe("Given I am connected as an employee", () => {
         .map((a) => a.innerHTML);
       const antiChrono = (a, b) => (Date.parse(a) < Date.parse(b) ? 1 : -1);
       const datesSorted = [...dates].sort(antiChrono);
-      console.log(datesSorted);
       // Set ignore order
       expect(new Set(dates)).toEqual(new Set(datesSorted));
       // expect(datesSorted).toEqual([...dates].sort(antiChrono));
@@ -88,15 +86,6 @@ describe("Given I am connected as an employee", () => {
       });
 
       test("Then, does the bill table appear", () => {
-        const onNavigate = (pathname) => {
-          document.body.innerHTML = ROUTES({ pathname });
-        };
-        const bill = new Bills({
-          document,
-          onNavigate,
-          store: null,
-          localStorage: window.localStorage,
-        });
         document.body.innerHTML = BillsUI({ data: bills });
 
         const root = document.createElement("div");
@@ -177,6 +166,7 @@ describe("Given I am a user connected as Employee", () => {
       window.onNavigate(ROUTES_PATH.Bills);
       await waitFor(() => screen.getByText("Mes notes de frais"));
       const contentPending = screen.getByText("pending");
+
       expect(contentPending).toBeTruthy();
       const contentRefused = screen.getByText("accepted");
       expect(contentRefused).toBeTruthy();

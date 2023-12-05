@@ -91,7 +91,7 @@ describe("Given that I am a user on login page", () => {
         localStorage: window.localStorage,
         onNavigate,
         PREVIOUS_LOCATION,
-        store,
+        store: store,
       });
 
       const handleSubmit = jest.fn(login.handleSubmitEmployee);
