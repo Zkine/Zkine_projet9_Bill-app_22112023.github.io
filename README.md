@@ -1,0 +1,1 @@
+Pour lancer l'application, il faut se référer au README du dossier Billed-app-FR-Back et celui du dossier Billed-app-FR-Front
