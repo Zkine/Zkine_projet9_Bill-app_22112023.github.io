@@ -15,6 +15,7 @@ import router from "../app/Router.js";
 import Bills from "../containers/Bills.js";
 
 describe("Given I am connected as an employee", () => {
+  // test d'unitaire
   describe("When I am on Bills Page", () => {
     test("Then, Loading page should be rendered", () => {
       document.body.innerHTML = BillsUI({ loading: true });
@@ -61,6 +62,7 @@ describe("Given I am connected as an employee", () => {
       // expect(datesSorted).toEqual([...dates].sort(antiChrono));
     });
 
+    // test d'intégration
     describe("When I am on Bills Page", () => {
       test("Then if I click I am directed to the form NewBill", () => {
         document.body.innerHTML = BillsUI({ data: bills });

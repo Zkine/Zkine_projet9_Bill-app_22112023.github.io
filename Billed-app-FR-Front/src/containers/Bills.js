@@ -65,7 +65,7 @@ export default class {
                 };
               }
             })
-            .sort((a, b) => (Date.parse(a.date) < Date.parse(b.date) ? 1 : -1));
+            .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
           return bills;
         });
     }
